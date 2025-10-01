@@ -25,6 +25,6 @@ class Prestamo extends Model
     // Relación con usuario
     public function usuario()
     {
-        return $this->belongsTo(BibliotecaUsuario::class, 'usuario_id');
+        return $this->belongsTo(User::class, 'usuario_id');
     }
 }

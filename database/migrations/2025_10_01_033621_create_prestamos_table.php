@@ -16,7 +16,7 @@ class CreatePrestamosTable extends Migration
         Schema::create('prestamos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('libro_id')->constrained('libros')->onDelete('cascade');
-            $table->foreignId('usuario_id')->constrained('biblioteca_usuarios')->onDelete('cascade');
+            $table->foreignId('usuario_id')->constrained('users')->onDelete('cascade');
             $table->date('fecha_prestamo');
             $table->date('fecha_devolucion')->nullable();
             $table->timestamps();

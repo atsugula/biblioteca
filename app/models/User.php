@@ -14,6 +14,10 @@ class User extends Authenticatable
     static $rules = [
         'name' => 'required',
         'username' => 'required',
+        'identificacion' => 'required|unique:biblioteca_usuarios',
+        'nombre_completo' => 'required',
+        'correo' => 'required|email|unique:biblioteca_usuarios',
+        'telefono' => 'nullable',
     ];
 
     /**
@@ -25,6 +29,10 @@ class User extends Authenticatable
         'name',
         'username',
         'password',
+        'identificacion',
+        'nombre_completo',
+        'correo',
+        'telefono',
     ];
 
     /**
@@ -35,5 +43,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    // Un usuario puede tener varios préstamos
+    public function prestamos()
+    {
+        return $this->hasMany(Prestamo::class, 'usuario_id');
+    }
 
 }

@@ -18,6 +18,10 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('username');
             $table->string('password');
+            $table->string('identificacion')->unique();
+            $table->string('nombre_completo');
+            $table->string('correo')->unique();
+            $table->string('telefono')->nullable();
         });
     }
 

@@ -3,7 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LibroController;
+use App\Http\Controllers\PrestamoController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\BibliotecaUsuarioController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -11,8 +14,11 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'], function () {
     //cargan los modulos basicos de un pos
     Route::get('home',[HomeController::class, 'index']);
-    Route::resource('usuarios',UserController::class)
-        ->only('index','create','store','edit','update','destroy')->names('usuarios');
+    Route::resource('usuarios',UserController::class)->names('usuarios');
+
+    Route::resource('libros', LibroController::class);
+    Route::resource('usuarios', BibliotecaUsuarioController::class);
+    Route::resource('prestamos', PrestamoController::class);
     //Cambiar contrasena de usuarios
     Route::get('cambiar-contrasena/{id}', [UserController::class, 'mostrarContrasena'])->name('usuario.form.cambiar-contrasena');
     Route::patch('cambiar-contrasena/{id}', [UserController::class, 'cambiarContrasena'])->name('usuario.cambiar-contrasena');

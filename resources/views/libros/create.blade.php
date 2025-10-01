@@ -1,4 +1,5 @@
-@extends('layout')
+@extends('layouts.app')
+{{-- @extends('layout') --}}
 
 @section('content')
 <h1>Registrar Libro</h1>

@@ -1,4 +1,5 @@
-@extends('layout')
+@extends('layouts.app')
+{{-- @extends('layout') --}}
 
 @section('content')
 <h1>Detalle del Libro</h1>

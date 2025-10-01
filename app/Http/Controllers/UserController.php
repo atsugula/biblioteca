@@ -52,7 +52,9 @@ class UserController extends Controller
 
         $existeUsername = User::where('username','=',$request['username'])->get();
 
-        if(count($existeUsername) == 0)User::create(['name' => $request['name'],'username' => $request['username'],'password' => Hash::make('12345678'),]);
+        $request['password'] = Hash::make('12345678');
+
+        if(count($existeUsername) == 0)User::create($request->all());
         else {
             $mensaje = 'Ya hay un usuario con ese username, intente nuevamente.';
             $tipo = 'error';
@@ -128,14 +130,6 @@ class UserController extends Controller
         $tipo = 'success';
         $user = User::find($id);
 
-        $usuConVenta = Venta::where('id_comprador','=',$user->id)->get();
-        $usuConCompra = Compra::where('id_comprador','=',$user->id)->get();
-        if(count($usuConVenta) == 0 && count($usuConCompra) == 0){
-            $user->delete();
-        }else{
-            $mensaje = 'Este usuario a realizado venta o compras, si se elimina alterara la generación de reportes.';
-            $tipo = 'error';
-        }
         return redirect()->route('usuarios.index')
             ->with($tipo, $mensaje);
     }

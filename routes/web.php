@@ -17,7 +17,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('usuarios',UserController::class)->names('usuarios');
 
     Route::resource('libros', LibroController::class);
-    Route::resource('usuarios', BibliotecaUsuarioController::class);
     Route::resource('prestamos', PrestamoController::class);
     //Cambiar contrasena de usuarios
     Route::get('cambiar-contrasena/{id}', [UserController::class, 'mostrarContrasena'])->name('usuario.form.cambiar-contrasena');

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Prestamo;
 use App\Models\Libro;
-use App\Models\BibliotecaUsuario;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PrestamoController extends Controller
@@ -18,7 +18,7 @@ class PrestamoController extends Controller
     public function create()
     {
         $libros = Libro::where('estado', 'disponible')->get();
-        $usuarios = BibliotecaUsuario::all();
+        $usuarios = User::all();
         return view('prestamos.create', compact('libros', 'usuarios'));
     }
 
@@ -26,7 +26,7 @@ class PrestamoController extends Controller
     {
         $request->validate([
             'libro_id' => 'required|exists:libros,id',
-            'usuario_id' => 'required|exists:biblioteca_usuarios,id',
+            'usuario_id' => 'required|exists:users,id',
             'fecha_prestamo' => 'required|date',
         ]);
 
@@ -47,7 +47,7 @@ class PrestamoController extends Controller
     public function edit(Prestamo $prestamo)
     {
         $libros = Libro::all();
-        $usuarios = BibliotecaUsuario::all();
+        $usuarios = User::all();
         return view('prestamos.edit', compact('prestamo', 'libros', 'usuarios'));
     }
 
@@ -55,7 +55,7 @@ class PrestamoController extends Controller
     {
         $request->validate([
             'libro_id' => 'required|exists:libros,id',
-            'usuario_id' => 'required|exists:biblioteca_usuarios,id',
+            'usuario_id' => 'required|exists:users,id',
             'fecha_prestamo' => 'required|date',
             'fecha_devolucion' => 'nullable|date|after_or_equal:fecha_prestamo',
         ]);

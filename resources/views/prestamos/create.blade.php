@@ -1,4 +1,5 @@
-@extends('layout')
+@extends('layouts.app')
+{{-- @extends('layout') --}}
 
 @section('content')
 <h1>Registrar Préstamo</h1>
@@ -7,7 +8,7 @@
     @csrf
     <div class="mb-3">
         <label>Libro</label>
-        <select name="libro_id" class="form-control">
+        <select name="libro_id" class="form-control select2">
             @foreach($libros as $libro)
                 <option value="{{ $libro->id }}">{{ $libro->titulo }}</option>
             @endforeach
@@ -15,7 +16,7 @@
     </div>
     <div class="mb-3">
         <label>Usuario</label>
-        <select name="usuario_id" class="form-control">
+        <select name="usuario_id" class="form-control select2">
             @foreach($usuarios as $usuario)
                 <option value="{{ $usuario->id }}">{{ $usuario->nombre_completo }}</option>
             @endforeach

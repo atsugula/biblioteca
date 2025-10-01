@@ -14,9 +14,9 @@ class User extends Authenticatable
     static $rules = [
         'name' => 'required',
         'username' => 'required',
-        'identificacion' => 'required|unique:biblioteca_usuarios',
+        'identificacion' => 'required|unique:users',
         'nombre_completo' => 'required',
-        'correo' => 'required|email|unique:biblioteca_usuarios',
+        'correo' => 'required|email|unique:users',
         'telefono' => 'nullable',
     ];
 

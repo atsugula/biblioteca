@@ -25,13 +25,5 @@ class UserSeeder extends Seeder
             'username' => 'aleja',
             'password' => Hash::make('12345678'),
         ]);
-        Categoria::create([
-            'nombre' => 'Seco',
-            'kilos' => '12.5',
-        ]);
-        Categoria::create([
-            'nombre' => 'Mojado',
-            'kilos' => '25',
-        ]);
     }
 }

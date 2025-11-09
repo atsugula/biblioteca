@@ -4,13 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Libro;
 use Illuminate\Http\Request;
+use App\Servicios\Arboles\ArbolLibros;
 
 class LibroController extends Controller
 {
     public function index()
     {
         $libros = Libro::all();
-        return view('libros.index', compact('libros'));
+        $arbol = new ArbolLibros();
+
+        foreach ($libros as $libro) {
+            $arbol->insertar($libro);
+        }
+
+        // Libros ordenados usando el árbol binario
+        $librosOrdenados = $arbol->recorridoInOrden();
+
+        return view('libros.index', compact('librosOrdenados'));
     }
 
     public function create()

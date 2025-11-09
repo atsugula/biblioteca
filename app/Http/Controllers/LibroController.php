@@ -8,19 +8,26 @@ use App\Servicios\Arboles\ArbolLibros;
 
 class LibroController extends Controller
 {
+
+    private ArbolLibros $arbol;
+
+    // El árbol se inyecta automáticamente por Laravel
+    public function __construct(ArbolLibros $arbol)
+    {
+        $this->arbol = $arbol;
+    }
+
     public function index()
     {
         $libros = Libro::all();
-        $arbol = new ArbolLibros();
 
         foreach ($libros as $libro) {
-            $arbol->insertar($libro);
+            $this->arbol->insertar($libro);
         }
 
-        // Libros ordenados usando el árbol binario
-        $librosOrdenados = $arbol->recorridoInOrden();
+        $libros = $this->arbol->recorridoInOrden();
 
-        return view('libros.index', compact('librosOrdenados'));
+        return view('libros.index', compact('libros'));
     }
 
     public function create()
